@@ -1,0 +1,23 @@
+{
+    "name":"Udon Custom Event Args",
+    "id":"com.genesis.udoncustomeventargs.vcc-listing",
+    "url":"https://NGenesis.github.io/UdonCustomEventArgs/index.json",
+    "author":{
+        "name":"Genesis",
+        "url":"https://github.com/NGenesis"
+    },
+    "description":"An extension to UdonSharp which enables support for calling custom events with arguments.",
+    "infoLink":{
+        "url":"http://github.com/NGenesis/UdonCustomEventArgs",
+        "text":"View on GitHub"
+    },
+    "bannerUrl":"banner.png",
+    "packages":[
+        {
+            "name":"com.genesis.udoncustomeventargs",
+            "releases":[
+                "https://github.com/NGenesis/UdonCustomEventArgs/releases/download/0.1.0/com.genesis.udoncustomeventargs-0.1.0.zip"
+            ]
+        }
+    ]
+}
