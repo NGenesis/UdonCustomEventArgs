@@ -16,7 +16,7 @@
         {
             "name":"com.genesis.udoncustomeventargs",
             "releases":[
-                "https://github.com/NGenesis/UdonCustomEventArgs/releases/download/0.1.0/com.genesis.udoncustomeventargs-0.1.0.zip"
+                "https://github.com/NGenesis/UdonCustomEventArgs/releases/download/0.2.0/com.genesis.udoncustomeventargs-0.2.0.zip"
             ]
         }
     ]
