@@ -1,10 +1,17 @@
 # Udon Custom Event Args
 ## Description
-### This extension adds support for calling `SendCustomEvent` on methods which have arguments and supports overloaded methods.
+This extension adds support for calling `SendCustomEvent` on methods which have arguments and supports overloaded methods.
 
 ## Installation & Usage
 1. Install the package through your preferred package manager, no additional setup is required.
-2. In your code, call `this.SendCustomEvent("eventname", arg0, ..., argN)` or `this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN })` with your method/event name followed by the arguments that the method/event requires.
+2. In your code, call one of the following with your method/event name followed by the arguments that the method/event requires:
+```csharp
+// Generic method
+this.SendCustomEvent("eventname", argT0, ..., argTN);
+
+// Non-generic method
+this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN });
+```
 
 ## Examples
 ```csharp
