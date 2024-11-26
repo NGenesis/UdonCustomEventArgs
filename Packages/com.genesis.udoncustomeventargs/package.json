@@ -1,0 +1,14 @@
+{
+  "name": "com.genesis.udoncustomeventargs",
+  "version": "0.1.0",
+  "displayName": "UdonCustomEventArgs",
+  "description": "An extension to UdonSharp which enables support for calling custom events with arguments.",
+  "author": {
+    "name": "Genesis",
+    "url": "https://github.com/NGenesis"
+  },
+  "unity": "2022.3",
+  "unityRelease": "22f1",
+  "vpmDependencies": {
+  }
+}
