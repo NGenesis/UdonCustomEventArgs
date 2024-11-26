@@ -3,8 +3,8 @@
 ### This extension adds support for calling `SendCustomEvent` on methods which have arguments and supports overloaded methods.
 
 ## Installation & Usage
-### 1. Install the package through your preferred package manager, no additional setup is required.
-### 2. In your code, call `this.SendCustomEvent("eventname", arg0, ..., argN)` or `this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN })` with your method/event name followed by the arguments that the method/event requires.
+1. Install the package through your preferred package manager, no additional setup is required.
+2. In your code, call `this.SendCustomEvent("eventname", arg0, ..., argN)` or `this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN })` with your method/event name followed by the arguments that the method/event requires.
 
 ## Examples
 ```csharp
@@ -62,6 +62,6 @@ public class MyBehaviour : UdonSharpBehaviour
 ```
 
 ## Notes & Caveats
-### Calling methods with arguments which cannot be bound to a specific overload will fall back to the default behaviour of calling the event without arguments.
-### This extension only supports passing arguments to methods using `SendCustomEvent`.  Other variants such as `SendCustomNetworkEvent`, `SendCustomEventDelayedSeconds` and `SendCustomEventDelayedFrames` are not supported.
-### Calling methods marked with the `RecursiveMethod` attribute may not work correctly.
+ - Calling methods with arguments which cannot be bound to a specific overload will fall back to the default behaviour of calling the event without arguments.
+ - This extension only supports passing arguments to methods using `SendCustomEvent`.  Other variants such as `SendCustomNetworkEvent`, `SendCustomEventDelayedSeconds` and `SendCustomEventDelayedFrames` are not supported.
+ - Calling methods marked with the `RecursiveMethod` attribute may not work correctly.
