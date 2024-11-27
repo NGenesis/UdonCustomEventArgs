@@ -105,6 +105,7 @@ public class MyBehaviour : UdonSharpBehaviour
     }
 }
 ```
+Note: `List` and non-UdonSharpBehaviour classes are supported in [U# 1.2 beta](https://github.com/MerlinVR/UdonSharp/releases) or higher.
 
 ## Notes & Caveats
  - Calling methods with arguments which cannot be bound to a specific overload will fall back to the default behaviour of calling the event without arguments.
