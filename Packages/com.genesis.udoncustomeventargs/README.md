@@ -95,13 +95,13 @@ public class MyBehaviour : UdonSharpBehaviour
         var handler = new MyEventHandler();
         handler1.EventTarget = target;
         handler1.EventName = eventName;
-        handler1.EventArguments = eventArgs;
+        handler1.EventArgs = eventArgs;
         EventHandlers.Add(handler);
     }
 
     public void CallEventHandlers()
     {
-        foreach(var handler in EventHandlers) handler.EventTarget.SendCustomEventArgs(handler.EventName, handler.EventArguments);
+        foreach(var handler in EventHandlers) handler.EventTarget.SendCustomEventArgs(handler.EventName, handler.EventArgs);
     }
 }
 ```
