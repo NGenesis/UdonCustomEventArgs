@@ -33,7 +33,7 @@ public class SomeThirdPartyBehaviour : UdonSharpBehaviour
     }
 }
 
-public class EventHandler
+public class MyEventHandler
 {
     public UdonBehaviour EventTarget;
     public string EventName;
@@ -44,7 +44,7 @@ public class EventHandler
 public class MyBehaviour : UdonSharpBehaviour
 {
     public SomeThirdPartyBehaviour AnotherBehaviour;
-    public List<EventHandler> EventHandlers = new List<EventHandler>();
+    public List<MyEventHandler> EventHandlers = new List<EventHandler>();
 
     void Start()
     {
@@ -92,7 +92,7 @@ public class MyBehaviour : UdonSharpBehaviour
 
     public void AddEventHandler(UdonBehaviour target, string eventName, object[] eventArgs)
     {
-        var handler = new EventHandler();
+        var handler = new MyEventHandler();
         handler1.EventTarget = target;
         handler1.EventName = eventName;
         handler1.EventArguments = eventArgs;
