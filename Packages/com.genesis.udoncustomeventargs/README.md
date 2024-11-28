@@ -8,7 +8,7 @@ This extension adds support for calling `SendCustomEvent` on methods which have 
  - Can be used to create flexible event handlers that use existing methods of different behaviours where creating standardized methods and variables to pass data around would be infeasible.
 
 ## Installation & Usage
-1. Install the package through your preferred package manager such as [VRChat Creator Companion](https://ngenesis.github.io/UdonCustomEventArgs/index.json), no additional setup is required.
+1. Install the [VCC package](https://ngenesis.github.io/UdonCustomEventArgs/index.json) through [VRChat Creator Companion](https://vcc.docs.vrchat.com/guides/community-repositories/#how-to-add-a-community-repository), no additional setup is required.
 2. In your code, call one of the following with your method/event name followed by the arguments that the method/event requires:
 ```csharp
 // Generic method
@@ -35,14 +35,14 @@ public class SomeThirdPartyBehaviour : UdonSharpBehaviour
 
 public class MyInteractEventHandler
 {
-    public UdonBehaviour EventTarget;
+    public UdonSharpBehaviour EventTarget;
     public string EventName;
     public object[] EventArgs;
 }
 
 public class MyPlayerTriggerEventHandler
 {
-    public UdonBehaviour EventTarget;
+    public UdonSharpBehaviour EventTarget;
     public string EventName;
 }
 
@@ -111,7 +111,7 @@ public class MyBehaviour : UdonSharpBehaviour
         Debug.Log($"Test_D");
     }
 
-    public void AddInteractEventHandler(UdonBehaviour target, string eventName, object[] eventArgs)
+    public void AddInteractEventHandler(UdonSharpBehaviour target, string eventName, object[] eventArgs)
     {
         var handler = new MyInteractEventHandler();
         handler.EventTarget = target;
@@ -120,7 +120,7 @@ public class MyBehaviour : UdonSharpBehaviour
         InteractEventHandlers.Add(handler);
     }
 
-    public void AddPlayerTriggerEventHandler(UdonBehaviour target, string eventName)
+    public void AddPlayerTriggerEventHandler(UdonSharpBehaviour target, string eventName)
     {
         var handler = new MyPlayerTriggerEventHandler();
         handler.EventTarget = target;
