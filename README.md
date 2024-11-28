@@ -8,6 +8,8 @@ This extension adds support for calling `SendCustomEvent` on methods which have 
  - Can be used to create flexible event handlers that use existing methods of different behaviours where creating standardized methods and variables to pass data around would be infeasible.
 
 ## Installation & Usage
+[![VPM Package Version](https://img.shields.io/vpm/v/com.genesis.udoncustomeventargs?repository_url=https%3A%2F%2Fngenesis.github.io%2FUdonCustomEventArgs%2Findex.json)](https://ngenesis.github.io/UdonCustomEventArgs)
+
 1. Install the [VCC package](https://ngenesis.github.io/UdonCustomEventArgs/index.json) through [VRChat Creator Companion](https://vcc.docs.vrchat.com/guides/community-repositories/#how-to-add-a-community-repository), no additional setup is required.
 2. In your code, call one of the following with your method/event name followed by the arguments that the method/event requires:
 ```csharp
