@@ -33,18 +33,25 @@ public class SomeThirdPartyBehaviour : UdonSharpBehaviour
     }
 }
 
-public class MyEventHandler
+public class MyInteractEventHandler
 {
     public UdonBehaviour EventTarget;
     public string EventName;
     public object[] EventArgs;
 }
 
+public class MyPlayerTriggerEventHandler
+{
+    public UdonBehaviour EventTarget;
+    public string EventName;
+}
+
 // A behaviour you created
 public class MyBehaviour : UdonSharpBehaviour
 {
     public SomeThirdPartyBehaviour AnotherBehaviour;
-    public List<MyEventHandler> EventHandlers = new List<EventHandler>();
+    public List<MyInteractEventHandler> InteractEventHandlers = new List<MyInteractEventHandler>();
+    public List<MyPlayerTriggerEventHandler> PlayerTriggerEventHandlers = new List<MyPlayerTriggerEventHandler>();
 
     void Start()
     {
@@ -64,11 +71,25 @@ public class MyBehaviour : UdonSharpBehaviour
         this.SendCustomEvent(nameof(Test), "these", "args", "are", "ignored"); // Displays "Test_D"
 
         // Store some event handlers to call later when Interact is triggered
-        AddEventHandler(this, nameof(Test), new object[] { 123.0f, "interact", 6, false, AnotherBehaviour });
-        AddEventHandler(AnotherBehaviour, nameof(SomeThirdPartyBehaviour.DoThing), new object[] { 42 });
+        AddInteractEventHandler(this, nameof(Test), new object[] { 123.0f, "interact", 6, false, AnotherBehaviour });
+        AddInteractEventHandler(AnotherBehaviour, nameof(SomeThirdPartyBehaviour.DoThing), new object[] { 42 });
+
+        // Store some event handlers to call later when OnPlayerTriggerEnter is triggered
+        AddPlayerTriggerEventHandler(this, nameof(Test));
+        AddPlayerTriggerEventHandler(AnotherBehaviour, nameof(SomeThirdPartyBehaviour.DoThing));
     }
 
-    public void Interact() => CallEventHandlers(); // Displays "Test_B 123.0 interact 6 false AnotherBehaviour" and "DoThing_A 42"
+    public override void Interact()
+    {
+        // Displays "Test_B 123.0 interact 6 false AnotherBehaviour" and "DoThing_A 42"
+        foreach(var handler in InteractEventHandlers) handler.EventTarget.SendCustomEventArgs(handler.EventName, handler.EventArgs);
+    }
+
+    public override void OnPlayerTriggerEnter(VRCPlayerApi player)
+    {
+        // Displays "Test_C XXXX" and "DoThing_A XXXX" where XXXX is the playerId that was passed in
+        foreach(var handler in PlayerTriggerEventHandlers) handler.EventTarget.SendCustomEvent(handler.EventName, player.playerId);
+    }
 
     public void Test(float floatValue, int intValue, string stringValue, bool boolValue, UdonSharpBehaviour behaviourValue)
     {
@@ -90,18 +111,21 @@ public class MyBehaviour : UdonSharpBehaviour
         Debug.Log($"Test_D");
     }
 
-    public void AddEventHandler(UdonBehaviour target, string eventName, object[] eventArgs)
+    public void AddInteractEventHandler(UdonBehaviour target, string eventName, object[] eventArgs)
     {
-        var handler = new MyEventHandler();
+        var handler = new MyInteractEventHandler();
         handler.EventTarget = target;
         handler.EventName = eventName;
         handler.EventArgs = eventArgs;
-        EventHandlers.Add(handler);
+        InteractEventHandlers.Add(handler);
     }
 
-    public void CallEventHandlers()
+    public void AddPlayerTriggerEventHandler(UdonBehaviour target, string eventName)
     {
-        foreach(var handler in EventHandlers) handler.EventTarget.SendCustomEventArgs(handler.EventName, handler.EventArgs);
+        var handler = new MyPlayerTriggerEventHandler();
+        handler.EventTarget = target;
+        handler.EventName = eventName;
+        PlayerTriggerEventHandlers.Add(handler);
     }
 }
 ```
