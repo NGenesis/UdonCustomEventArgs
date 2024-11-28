@@ -93,9 +93,9 @@ public class MyBehaviour : UdonSharpBehaviour
     public void AddEventHandler(UdonBehaviour target, string eventName, object[] eventArgs)
     {
         var handler = new MyEventHandler();
-        handler1.EventTarget = target;
-        handler1.EventName = eventName;
-        handler1.EventArgs = eventArgs;
+        handler.EventTarget = target;
+        handler.EventName = eventName;
+        handler.EventArgs = eventArgs;
         EventHandlers.Add(handler);
     }
 
