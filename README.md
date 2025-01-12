@@ -10,7 +10,7 @@ This package extends support in U# for executing custom methods using `SendCusto
 
 ## Supported APIs
 | Name | Arguments | Return Value | Method Overloads | API |
-| --- | --- |
+| --- | --- | --- | --- | --- |
 | `SendCustomEvent` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)` |
 | `SendCustomEventArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventArgs(string eventName, object[] args)` |
 | `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T arg0, ..., T argN)` |
