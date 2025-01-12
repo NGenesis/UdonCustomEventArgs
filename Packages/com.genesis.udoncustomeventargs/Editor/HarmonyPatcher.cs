@@ -9,6 +9,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace UdonCustomEventArgs.Editor
 {
@@ -70,6 +71,35 @@ namespace UdonCustomEventArgs.Editor
                 var LoadSyntaxTreesAndCreateModulesPostfixPatch = typeof(CompilationContext).GetMethod(nameof(CompilationContext.LoadSyntaxTreesAndCreateModules), BindingFlags.NonPublic | BindingFlags.Static);
                 Harmony.Patch(LoadSyntaxTreesAndCreateModules, null, new HarmonyMethod(LoadSyntaxTreesAndCreateModulesPostfixPatch));
             }
+
+            // UdonSharp.Compiler.UdonSharpCompilerV1
+            var udonsharpcompilerV1ContextType = assemblyTypes.FirstOrDefault(t => t.FullName == "UdonSharp.Compiler.UdonSharpCompilerV1");
+            if(udonsharpcompilerV1ContextType != null)
+            {
+                // private static void Compile(CompilationContext compilationContext, IReadOnlyDictionary<string, ProgramAssetInfo> rootProgramLookup, IEnumerable<string> allSourcePaths, string[] scriptingDefines)
+                var Compile = udonsharpcompilerV1ContextType.GetMethod("Compile", BindingFlags.NonPublic | BindingFlags.Static);
+                var CompilePrefixPatch = typeof(UdonSharpCompilerV1).GetMethod(nameof(UdonSharpCompilerV1.Compile), BindingFlags.NonPublic | BindingFlags.Static);
+                Harmony.Patch(Compile, new HarmonyMethod(CompilePrefixPatch));
+            }
+        }
+
+        internal class ProgramAssetInfo
+        {
+            public UdonSharpProgramAsset programAsset;
+            public Type scriptClass;
+        }
+
+        // namespace UdonSharp.Compiler
+        // internal class UdonSharpCompilerV1
+        internal static class UdonSharpCompilerV1
+        {
+            internal static Dictionary<string, ProgramAssetInfo> RootProgramAssets;
+
+            // private static void Compile(CompilationContext compilationContext, IReadOnlyDictionary<string, ProgramAssetInfo> rootProgramLookup, IEnumerable<string> allSourcePaths, string[] scriptingDefines)
+            internal static void Compile(object compilationContext, IReadOnlyDictionary<string, ProgramAssetInfo> rootProgramLookup, IEnumerable<string> allSourcePaths, string[] scriptingDefines)
+            {
+                RootProgramAssets = new Dictionary<string, ProgramAssetInfo>(rootProgramLookup);
+            }
         }
 
         // namespace UdonSharp.Compiler
@@ -79,14 +109,19 @@ namespace UdonCustomEventArgs.Editor
             // public ModuleBinding[] LoadSyntaxTreesAndCreateModules(IEnumerable<string> sourcePaths, string[] scriptingDefines)
             internal static void LoadSyntaxTreesAndCreateModules(ref object __result)
             {
+                var programAssets = UdonSharpProgramAsset.GetAllUdonSharpPrograms();
+
                 // Skip injection when there are scripts to be upgraded
-                if(!UdonSharpProgramAsset.GetAllUdonSharpPrograms().All(e => e.ScriptVersion >= UdonSharpProgramVersion.CurrentVersion)) return;
+                if(!programAssets.All(p => p.ScriptVersion >= UdonSharpProgramVersion.CurrentVersion)) return;
 
                 Parallel.ForEach(__result as IEnumerable<object>, moduleBinding =>
                 {
                     var filePath = moduleBinding.GetType().GetField("filePath", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).GetValue(moduleBinding) as string;
-                    var tree = moduleBinding.GetType().GetField("tree", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                    tree.SetValue(moduleBinding, InjectDispatcherMembers(filePath, tree.GetValue(moduleBinding) as SyntaxTree));
+                    if(UdonSharpCompilerV1.RootProgramAssets.ContainsKey(filePath))
+                    {
+                        var tree = moduleBinding.GetType().GetField("tree", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                        tree.SetValue(moduleBinding, InjectDispatcherMembers(filePath, tree.GetValue(moduleBinding) as SyntaxTree));
+                    }
                 });
             }
 
