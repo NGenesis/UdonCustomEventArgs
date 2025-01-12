@@ -13,11 +13,11 @@ This package extends support in U# for executing custom methods using `SendCusto
 | --- | --- | --- | --- | --- |
 | `SendCustomEvent` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)` |
 | `SendCustomEventArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventArgs(string eventName, object[] args)` |
-| `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T arg0, ..., T argN)` |
+| `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
 | `SendCustomEventDelayedSecondsArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)` |
-| `SendCustomEventDelayedFrames` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T arg0, ..., T argN)` |
+| `SendCustomEventDelayedFrames` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
 | `SendCustomEventDelayedFramesArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)` |
-| `TryExecuteCustomEvent` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T arg0, ..., T argN)` |
+| `TryExecuteCustomEvent` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T0 arg0, ..., TN argN)` |
 | `TryExecuteCustomEventArgs` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValue, object[] args)` |
 
 ## Installation & Usage
