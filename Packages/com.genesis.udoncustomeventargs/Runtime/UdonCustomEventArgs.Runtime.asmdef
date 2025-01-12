@@ -15,6 +15,12 @@
     ],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.merlin.udonsharp",
+            "expression": "1.2.0",
+            "define": "UDONSHARP_1_2_OR_NEWER"
+        }
+    ],
     "noEngineReferences": false
 }

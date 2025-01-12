@@ -1,11 +1,24 @@
 # Udon Custom Event Args
 ## Description
-This extension adds support for calling `SendCustomEvent` on methods which have arguments and supports overloaded methods.
+This package extends support in U# for executing custom methods using `SendCustomEvent` and its variants with support for arguments, return values and overloaded methods.
 
 ## Why use this?
+ - Adds support for calling custom events with arguments, return values and overloaded methods.
  - Supports calling custom methods on third party behaviours without modifying their source code.
    - No inheriting from custom base classes, adding custom attributes to methods, etc.
  - Can be used to create flexible event handlers that use existing methods of different behaviours where creating standardized methods and variables to pass data around would be infeasible.
+
+## Supported APIs
+| Name | Arguments | Return Value | Method Overloads | API |
+| --- | --- |
+| `SendCustomEvent` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)` |
+| `SendCustomEventArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventArgs(string eventName, object[] args)` |
+| `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T arg0, ..., T argN)` |
+| `SendCustomEventDelayedSecondsArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)` |
+| `SendCustomEventDelayedFrames` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T arg0, ..., T argN)` |
+| `SendCustomEventDelayedFramesArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)` |
+| `TryExecuteCustomEvent` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T arg0, ..., T argN)` |
+| `TryExecuteCustomEventArgs` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValue, object[] args)` |
 
 ## Installation & Usage
 [![VPM Package Version](https://img.shields.io/vpm/v/com.genesis.udoncustomeventargs?repository_url=https%3A%2F%2Fngenesis.github.io%2FUdonCustomEventArgs%2Findex.json)](https://ngenesis.github.io/UdonCustomEventArgs)
@@ -79,6 +92,13 @@ public class MyBehaviour : UdonSharpBehaviour
         // Store some event handlers to call later when OnPlayerTriggerEnter is triggered
         AddPlayerTriggerEventHandler(this, nameof(Test));
         AddPlayerTriggerEventHandler(AnotherBehaviour, nameof(SomeThirdPartyBehaviour.DoThing));
+
+        // Calling methods and getting their return value
+        if(this.TryExecuteCustomEvent(nameof(GetSum), out int sum, 2, 3)) Debug.Log($"2 + 3 = {sum}"); // Displays "2 + 3 = 5"
+
+        // Calling methods with a delay
+        this.SendCustomEventDelayedSeconds(nameof(DelayedTest), 5f, EventTiming.Update, "This message appears later!"); // Displays "This message appears later!" after 5 seconds
+        this.SendCustomEventDelayedFrames(nameof(DelayedTest), 1, EventTiming.LateUpdate, "This message appears on the next frame!"); // Displays "This message appears on the next frame!" in the next frame
     }
 
     public override void Interact()
@@ -113,6 +133,16 @@ public class MyBehaviour : UdonSharpBehaviour
         Debug.Log($"Test_D");
     }
 
+    public int GetSum(int a, int b)
+    {
+        return a + b;
+    }
+
+    public void DelayedTest(string message)
+    {
+        Debug.Log(message);
+    }
+
     public void AddInteractEventHandler(UdonSharpBehaviour target, string eventName, object[] eventArgs)
     {
         var handler = new MyInteractEventHandler();
@@ -135,5 +165,5 @@ Note: `List` and non-UdonSharpBehaviour classes are supported in [U# 1.2 beta](h
 
 ## Notes & Caveats
  - Calling methods with arguments which cannot be bound to a specific overload will fall back to the default behaviour of calling the event without arguments.
- - This extension only supports passing arguments to methods using `SendCustomEvent`.  Other variants such as `SendCustomNetworkEvent`, `SendCustomEventDelayedSeconds` and `SendCustomEventDelayedFrames` are not supported.
+ - Calling methods with arguments using `SendCustomNetworkEvent` is not currently supported.
  - Calling methods marked with the `RecursiveMethod` attribute may not work correctly.

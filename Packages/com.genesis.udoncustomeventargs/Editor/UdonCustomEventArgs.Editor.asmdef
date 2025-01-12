@@ -5,17 +5,30 @@
         "VRC.Udon",
         "UdonSharp.Runtime",
         "UdonSharp.Editor",
-        "UdonCustomEventArgs.Runtime"
+        "UdonCustomEventArgs.Runtime",
+        "VRC.Udon.Editor"
     ],
     "includePlatforms": [
         "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Microsoft.CodeAnalysis.dll",
+        "Microsoft.CodeAnalysis.CSharp.dll",
+        "VRC.Udon.Common.dll",
+        "0Harmony.dll",
+        "System.Collections.Immutable.dll"
+    ],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.merlin.udonsharp",
+            "expression": "1.2.0",
+            "define": "UDONSHARP_1_2_OR_NEWER"
+        }
+    ],
     "noEngineReferences": false
 }
