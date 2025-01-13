@@ -9,16 +9,16 @@ This package extends support in U# for executing custom methods using `SendCusto
  - Can be used to create flexible event handlers that use existing methods of different behaviours where creating standardized methods and variables to pass data around would be infeasible.
 
 ## Supported APIs
-| Name | Arguments | Return Value | Method Overloads | API |
-| --- | --- | --- | --- | --- |
-| `SendCustomEvent` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)` |
-| `SendCustomEventArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventArgs(string eventName, object[] args)` |
-| `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
-| `SendCustomEventDelayedSecondsArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)` |
-| `SendCustomEventDelayedFrames` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
-| `SendCustomEventDelayedFramesArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)` |
-| `TryExecuteCustomEvent` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T0 arg0, ..., TN argN)` |
-| `TryExecuteCustomEventArgs` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValue, object[] args)` |
+| Name | Arguments | Return Value | API |
+| --- | --- | --- | --- |
+| `SendCustomEvent` | :heavy_check_mark: | :x: | `void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)` |
+| `SendCustomEventArgs` | :heavy_check_mark: | :x: | `void SendCustomEventArgs(string eventName, object[] args)` |
+| `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
+| `SendCustomEventDelayedSecondsArgs` | :heavy_check_mark: | :x: | `void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)` |
+| `SendCustomEventDelayedFrames` | :heavy_check_mark: | :x: | `void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
+| `SendCustomEventDelayedFramesArgs` | :heavy_check_mark: | :x: | `void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)` |
+| `TryExecuteCustomEvent` | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T0 arg0, ..., TN argN)` |
+| `TryExecuteCustomEventArgs` | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValue, object[] args)` |
 
 ## Installation & Usage
 [![VPM Package Version](https://img.shields.io/vpm/v/com.genesis.udoncustomeventargs?repository_url=https%3A%2F%2Fngenesis.github.io%2FUdonCustomEventArgs%2Findex.json)](https://ngenesis.github.io/UdonCustomEventArgs)
