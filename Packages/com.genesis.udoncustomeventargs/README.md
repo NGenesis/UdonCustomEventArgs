@@ -8,18 +8,6 @@ This package extends support in U# for executing custom methods using `SendCusto
    - No inheriting from custom base classes, adding custom attributes to methods, etc.
  - Can be used to create flexible event handlers that use existing methods of different behaviours where creating standardized methods and variables to pass data around would be infeasible.
 
-## Supported APIs
-| Name | Arguments | Return Value | Method Overloads | API |
-| --- | --- | --- | --- | --- |
-| `SendCustomEvent` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)` |
-| `SendCustomEventArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventArgs(string eventName, object[] args)` |
-| `SendCustomEventDelayedSeconds` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
-| `SendCustomEventDelayedSecondsArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)` |
-| `SendCustomEventDelayedFrames` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T0 arg0, ..., TN argN)` |
-| `SendCustomEventDelayedFramesArgs` | :heavy_check_mark: | :x: | :heavy_check_mark: | `void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)` |
-| `TryExecuteCustomEvent` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T0 arg0, ..., TN argN)` |
-| `TryExecuteCustomEventArgs` | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValue, object[] args)` |
-
 ## Installation & Usage
 [![VPM Package Version](https://img.shields.io/vpm/v/com.genesis.udoncustomeventargs?repository_url=https%3A%2F%2Fngenesis.github.io%2FUdonCustomEventArgs%2Findex.json)](https://ngenesis.github.io/UdonCustomEventArgs)
 
@@ -32,6 +20,122 @@ this.SendCustomEvent("eventname", arg0, ..., argN);
 // Non-generic method
 this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN });
 ```
+
+## Supported APIs
+### SendCustomEvent / SendCustomEventArgs
+<table>
+ <tr align="left">
+  <td>
+   
+```csharp
+void SendCustomEvent<T0, ..., TN>(string eventName, T0 arg0, ..., TN argN)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">Executes a public method on a behaviour with the specified event name and arguments.</td>
+ </tr>
+ <tr align="left">
+  <td>
+   
+```csharp
+void SendCustomEventArgs(string eventName, object[] args)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">
+   
+   Non-generic version of `SendCustomEvent` that executes a public method on a behaviour with the specified event name and a list of arguments.
+  </td>
+ </tr>
+ </table>
+
+### SendCustomEventDelayedSeconds / SendCustomEventDelayedSecondsArgs
+ <table>
+ <tr align="left">
+  <td>
+   
+```csharp
+void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySeconds, EventTiming eventTiming, T0 arg0, ..., TN argN)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">Executes a public method on a behaviour with the specified event name and arguments after a time delay, measured in seconds.</td>
+ </tr>
+ <tr align="left">
+  <td>
+   
+```csharp
+void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">
+   
+   Non-generic version of `SendCustomEventDelayedSeconds` that executes a public method on a behaviour with the specified event name and a list of arguments after a time delay, measured in seconds.
+  </td>
+ </tr>
+ </table>
+
+### SendCustomEventDelayedFrames / SendCustomEventDelayedFramesArgs
+ <table>
+ <tr align="left">
+  <td>
+   
+```csharp
+void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames, EventTiming eventTiming, T0 arg0, ..., TN argN)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">Executes a public method on a behaviour with the specified event name and arguments after a frame delay.</td>
+ </tr>
+ <tr align="left">
+  <td>
+   
+```csharp
+void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">
+   
+   Non-generic version of `SendCustomEventDelayedFrames` that executes a public method on a behaviour with the specified event name and a list of arguments after a frame delay.
+  </td>
+ </tr>
+ </table>
+
+### TryExecuteCustomEvent / TryExecuteCustomEventArgs
+ <table>
+ <tr align="left">
+  <td>
+   
+```csharp
+bool TryExecuteCustomEvent<TResult, T0, ..., TN>(string eventName, out TResult returnValue, T0 arg0, ..., TN argN)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">Executes a public method on a behaviour with the specified event name and arguments and outputs the return value of the method to the specified variable.  If the method was successfully executed, this method will return `true`, otherwise `false`.</td>
+ </tr>
+ <tr align="left">
+  <td>
+   
+```csharp
+bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValue, object[] args)
+```
+  </td>
+ </tr>
+ <tr align="left">
+  <td colspan="2">
+   
+   Non-generic version of `TryExecuteCustomEventArgs` that executes a public method on a behaviour with the specified event name and arguments and outputs the return value of the method to the specified variable.  If the method was successfully executed, this method will return `true`, otherwise `false`.</td>
+ </tr>
+</table>
 
 ## Examples
 ```csharp
