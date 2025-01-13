@@ -8,6 +8,19 @@ This package extends support in U# for executing custom methods using `SendCusto
    - No inheriting from custom base classes, adding custom attributes to methods, etc.
  - Can be used to create flexible event handlers that use existing methods of different behaviours where creating standardized methods and variables to pass data around would be infeasible.
 
+## Installation & Usage
+[![VPM Package Version](https://img.shields.io/vpm/v/com.genesis.udoncustomeventargs?repository_url=https%3A%2F%2Fngenesis.github.io%2FUdonCustomEventArgs%2Findex.json)](https://ngenesis.github.io/UdonCustomEventArgs)
+
+1. Install the [VCC package](https://ngenesis.github.io/UdonCustomEventArgs/index.json) through [VRChat Creator Companion](https://vcc.docs.vrchat.com/guides/community-repositories/#how-to-add-a-community-repository), no additional setup is required.
+2. In your code, call one of the following with your method/event name followed by the arguments that the method/event requires:
+```csharp
+// Generic method
+this.SendCustomEvent("eventname", arg0, ..., argN);
+
+// Non-generic method
+this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN });
+```
+
 ## Supported APIs
 ### SendCustomEvent / SendCustomEventArgs
 <table>
@@ -123,19 +136,6 @@ bool TryExecuteCustomEventArgs<TResult>(string eventName, out TResult returnValu
    Non-generic version of `TryExecuteCustomEventArgs` that executes a public method on a behaviour with the specified event name and arguments and outputs the return value of the method to the specified variable.  If the method was successfully executed, this method will return `true`, otherwise `false`.</td>
  </tr>
 </table>
-
-## Installation & Usage
-[![VPM Package Version](https://img.shields.io/vpm/v/com.genesis.udoncustomeventargs?repository_url=https%3A%2F%2Fngenesis.github.io%2FUdonCustomEventArgs%2Findex.json)](https://ngenesis.github.io/UdonCustomEventArgs)
-
-1. Install the [VCC package](https://ngenesis.github.io/UdonCustomEventArgs/index.json) through [VRChat Creator Companion](https://vcc.docs.vrchat.com/guides/community-repositories/#how-to-add-a-community-repository), no additional setup is required.
-2. In your code, call one of the following with your method/event name followed by the arguments that the method/event requires:
-```csharp
-// Generic method
-this.SendCustomEvent("eventname", arg0, ..., argN);
-
-// Non-generic method
-this.SendCustomEventArgs("eventname", new object[] { arg0, ..., argN });
-```
 
 ## Examples
 ```csharp
