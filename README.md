@@ -51,7 +51,7 @@ void SendCustomEventArgs(string eventName, object[] args)
  </tr>
  </table>
 
-### SendCustomEventDelayedSeconds / SendCustomEventDelayedSecondsArgs
+### SendCustomEventDelayedSeconds / SendCustomEventArgsDelayedSeconds
  <table>
  <tr align="left">
   <td>
@@ -68,7 +68,7 @@ void SendCustomEventDelayedSeconds<T0, ..., TN>(string eventName, float delaySec
   <td>
    
 ```csharp
-void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)
+void SendCustomEventArgsDelayedSeconds(string eventName, float delaySeconds, EventTiming eventTiming, object[] args)
 ```
   </td>
  </tr>
@@ -80,7 +80,7 @@ void SendCustomEventDelayedSecondsArgs(string eventName, float delaySeconds, Eve
  </tr>
  </table>
 
-### SendCustomEventDelayedFrames / SendCustomEventDelayedFramesArgs
+### SendCustomEventDelayedFrames / SendCustomEventArgsDelayedFrames
  <table>
  <tr align="left">
   <td>
@@ -97,7 +97,7 @@ void SendCustomEventDelayedFrames<T0, ..., TN>(string eventName, int delayFrames
   <td>
    
 ```csharp
-void SendCustomEventDelayedFramesArgs(string eventName, int delayFrames, EventTiming eventTiming, object[] args)
+void SendCustomEventArgsDelayedFrames(string eventName, int delayFrames, EventTiming eventTiming, object[] args)
 ```
   </td>
  </tr>
